@@ -1,26 +1,24 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import './App.css';
-import { faClapperboard } from "@fortawesome/free-solid-svg-icons";
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Home from "./pages/Home";
+import Browse from "./pages/Browse";
+import Favourites from './pages/Favourites';
+
 
 
 function App() {
   return (
     <div>
-       <section>
-                <nav>
-            <a href="">
-              <div className="logo-img">
-              <FontAwesomeIcon className="icon" icon={faClapperboard} />
-                <h2 className="logo">movies</h2>
-              </div>
-            </a>
-                   <ul>
-                    <li className="lists"><a href=""><span className="home">Home</span> </a></li>
-                    <li className="lists"><a href="">Browse Movies</a></li>
-                    <li className="lists"><a href="">Favourites</a></li>
-                   </ul>
-                </nav>
-            </section>
+  <Router>
+    <Routes>
+     <Route path="/home" element={<Home/>} />
+     <Route path ="/browse" element={<Browse/>} />
+     <Route path="/favourites" element={<Favourites/>} />
+    </Routes>
+  </Router>
+
     </div>
   );
 }

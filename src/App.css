@@ -5,7 +5,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    background-color: #f5f5f5;
+    /* background-color: #f5f5f5; */
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -52,7 +52,7 @@ a{
     text-decoration: none;
 }
 
-.home{
+.org-li{
     color: #f95738;
 }
 
@@ -70,12 +70,172 @@ a{
     width: 0;
     right: 0;
     background-color: black;
-    transition: all 300ms ease;
+    transition: all 500ms ease;
 
 }
 
 .lists :hover:after{
 left: 0;
 width: 100%;
+margin-left: 12px;
 }
 
+
+
+.big-text{
+    color: #f95738;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-top: 30px;
+}
+
+
+.fav{
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-top: 40px;
+    color: #555;
+}
+
+.shows{
+    color: #f95738;
+    padding-left: 10px;
+}
+
+.search-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 45px;
+
+
+}
+
+input{
+    width: 550px;
+    height: 70px;
+    border-radius: 20px;
+    padding-left: 24px;
+    font-size: 20px;
+    background-color: white;
+}
+
+
+
+.button{
+    width: 100px;
+    height: 60px;
+    background-color: #f95738;
+    border-radius: 12px;
+    margin-left: 20px;
+    border: none;
+}
+
+.magnify{
+    width: 30px;
+    height: 20px;
+    background-color: #f95738;
+    color: white;
+}
+
+.btm-img{
+display: flex;
+justify-content: center;
+align-items: center;
+width: 320px;
+}
+
+.footer-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+    margin-bottom: 35px;
+  
+}
+
+
+.bm{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    font-weight: 400;
+    margin-top: 35px;
+    color: white;
+}
+
+.btm-half{
+    padding-top: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.filter{
+    color: #555;
+    font-size: 20px;
+}
+
+
+.search-results{
+padding-right: 700px;
+font-size: 24px;
+color: #555;
+}
+
+
+
+
+/* FIX ThIS*/
+.home-page{
+    background-color: #f5f5f5;
+
+}
+
+.overlay{
+    background-color: #f95738;
+}
+
+
+
+
+
+
+.lists-browse{
+    position: relative;
+}
+
+.lists-browse ::after {
+    content: "" ;
+    position: absolute;
+    bottom: -3px;
+    height: 3px;
+    width: 0;
+    right: 0;
+    background-color: white;
+    transition: all 500ms ease;
+
+}
+
+
+.logo-img-browse{
+    color: white;
+    display: flex;
+    align-items: center;
+    padding-left: 12px;
+}
+
+.icon-browse{
+    font-size: 40px;
+    color: white;
+}
+
+.logo-browse{
+    font-size: 32px;
+    padding-left: 12px;
+}
