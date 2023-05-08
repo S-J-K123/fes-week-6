@@ -5,46 +5,45 @@ import React from "react";
 const Browse = () => {
   return (
     <div>
-        <div className="overlay">
- <section>
-        <nav>
+ <section className="bg-orange">
+        <nav className="bg-orange">
           <a href="">
-            <div className="logo-img-browse">
-              <FontAwesomeIcon className="icon-browse" icon={faClapperboard} />
-              <h2 className="logo-browse">movies</h2>
+            <div className="logo-img-browse bg-orange ">
+              <FontAwesomeIcon className="icon-browse bg-orange" icon={faClapperboard} />
+              <h2 className="logo-browse bg-orange">movies</h2>
             </div>
           </a>
           <ul>
-            <li className="lists">
-              <a href="/home"> Home </a>
+            <li className="lists-browse bg-orange">
+              <a className="bg-orange-list" href="/home"> Home </a>
             </li>
-            <li className="lists">
-              <a href="browse">
+            <li className="lists-browse bg-orange">
+              <a className="bg-orange-list" href="browse">
                 Browse Movies
               </a>
             </li>
-            <li className="lists">
-              <a href="favourites">Favourites</a>
+            <li className="lists-browse bg-orange">
+              <a className="bg-orange-list" href="favourites">Favourites</a>
             </li>
           </ul>
         </nav>
 
-        <h1 className="bm">Browse Our Movies</h1>
+        <h1 className="bm bg-orange">Browse Our Movies</h1>
 
-        <div className="search-container">
-          <form action="">
-            <input
+        <div className="search-container-browse bg-orange">
+          <form action="" className="bg-orange">
+            <input className="browse-input"
               type="text"
               placeholder="Search thousands of movies..."
               name="Search"
             />
-            <button className="button">
-              <FontAwesomeIcon className="magnify" icon={faMagnifyingGlass} />
+            <button className="button-browse">
+              <FontAwesomeIcon className="magnify-browse" icon={faMagnifyingGlass} />
             </button>
           </form>
         </div>
       </section>
-        </div>
+      
      
 
       <section className="btm-half">
@@ -54,7 +53,23 @@ const Browse = () => {
           <h2 className="filter">
             Filter by year
           </h2>
+          
       </section>
+
+      <div className="row">
+    <div className="user-list">
+      <div class="user">
+        <div className="user-card">
+          <div className="user-card__container">
+            <h3>Poster: <b>Poster</b> </h3>
+              <p>Title: <b>Title</b> </p>
+              <p>Type: <b>Type</b></p>
+              <p>Year: <b>Year</b></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
     </div>
   );
 };
