@@ -287,6 +287,7 @@ padding-bottom: 65px;
     height: 30px;
     background-color: white;
     color: #f95738;
+    margin-right: -79px;
 }
 
 
@@ -339,3 +340,57 @@ padding-bottom: 65px;
   }
 
 
+
+  .fav-title{
+    color: #555;
+    font-size: 24px;
+    font-weight: 600;
+    padding-left: 172px;
+    padding-top: 20px;
+  }
+
+
+  .toggle-container{
+    position: absolute;
+    height: 42px;
+    background-color: #ccc;
+    border-radius: 34px;
+    width: 80px;
+   margin-top: -23px;
+    right: 10%;
+  }
+
+
+
+  .toggle-button{
+    width: 34px;
+    height: 34px;
+    background: white;
+    border-radius: 50%;
+    margin-top: 3px;
+    cursor: pointer;
+  }
+
+
+
+
+  .toggle-button ::before{
+    transform: translateX(26px);
+  }
+
+
+
+
+  .slider-container{
+    background-color: white;
+    width: 364px;
+    height: 160px;
+    border-radius: 8px;
+    margin-left: 1025px;
+    margin-top: -103px;
+
+  }
+.filter-btn{
+    margin-top: 95px;
+    margin-left: 282px;
+}

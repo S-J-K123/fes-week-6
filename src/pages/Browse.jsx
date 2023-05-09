@@ -1,13 +1,15 @@
 import { faClapperboard, faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import Switch from "../components/switch";
+import DateSlider from "../components/Date-slider";
 
 const Browse = () => {
   return (
     <div>
  <section className="bg-orange">
         <nav className="bg-orange">
-          <a href="">
+          <a href="/">
             <div className="logo-img-browse bg-orange ">
               <FontAwesomeIcon className="icon-browse bg-orange" icon={faClapperboard} />
               <h2 className="logo-browse bg-orange">movies</h2>
@@ -15,7 +17,7 @@ const Browse = () => {
           </a>
           <ul>
             <li className="lists-browse bg-orange">
-              <a className="bg-orange-list" href="/home"> Home </a>
+              <a className="bg-orange-list" href="/"> Home </a>
             </li>
             <li className="lists-browse bg-orange">
               <a className="bg-orange-list" href="browse">
@@ -53,8 +55,12 @@ const Browse = () => {
           <h2 className="filter">
             Filter by year
           </h2>
-          
+          <Switch/>
       </section>
+  
+
+    
+
 
       <div className="row">
     <div className="user-list">
@@ -70,6 +76,8 @@ const Browse = () => {
       </div>
     </div>
   </div>
+
+  <DateSlider/>
     </div>
   );
 };
