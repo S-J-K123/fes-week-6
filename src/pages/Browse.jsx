@@ -2,9 +2,17 @@ import { faClapperboard, faMagnifyingGlass } from "@fortawesome/free-solid-svg-i
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Switch from "../components/switch";
-import DateSlider from "../components/Date-slider";
+import Modal from "../components/Modal";
+
+
+
+
 
 const Browse = () => {
+
+
+
+
   return (
     <div>
  <section className="bg-orange">
@@ -77,7 +85,7 @@ const Browse = () => {
     </div>
   </div>
 
-  <DateSlider/>
+  {/* <Modal/> */}
     </div>
   );
 };

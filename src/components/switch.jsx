@@ -3,11 +3,18 @@ import React from 'react';
 const Switch = () => {
     return (
         <div>
-      <div className='toggle-container'>
-       <div className='toggle-button'>
+  
 
-       </div>
-      </div>
+
+
+
+<label className="switch">
+  <input type="checkbox"/> 
+  <span class="slider round"></span>
+</label>
+
+
+      
         </div>
     );
 }
