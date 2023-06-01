@@ -10,6 +10,9 @@ import Modal from "../components/Modal";
 const Browse = () => {
   const [showModal, setShowModal] = useState(false);
 
+
+
+  
   return (
     <div>
       <section className="bg-orange">
@@ -66,12 +69,13 @@ const Browse = () => {
       <section className="btm-half">
         <h2 className="search-results">Search results</h2>
         <h2 className="filter">Filter by year</h2>
-       <button className="switch-btn" onClick={()=>setShowModal(true)}> <Switch/> </button> 
+       <button className="switch-btn"   onClick={()=>setShowModal(!showModal)}> <Switch/> </button> 
+       
       </section>
 
       <div className="row">
         <div className="user-list">
-          <div class="user">
+          <div className="user">
             <div className="user-card">
               <div className="user-card__container">
                 <h3>
@@ -93,6 +97,7 @@ const Browse = () => {
       </div>
 
       {showModal ? <Modal /> : null}
+    
     </div>
   );
 };
