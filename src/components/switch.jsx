@@ -1,12 +1,14 @@
 import React from "react";
+import './switch.css'
 
 const Switch = () => {
   return (
     <div>
       <label className="switch">
-        // fixing bug
+       
         {/* <input type="checkbox" /> */}
-        <span className="slider round"></span>
+        <input type="checkbox" className="switch-input" />
+        {/* <span className="slider round"></span> */}
       </label>
     </div>
   );

@@ -1,0 +1,17 @@
+.range-input {
+    width: 300px;
+    margin-left: 35px;
+    margin-top: 77px;
+    height: 1px;
+    margin-bottom: 20px;
+    cursor: pointer;
+  
+  }
+  
+  .range-input::-moz-range-thumb {
+    background-color: red !important;
+  }
+  
+  .range-input::-ms-thumb {
+    background-color: red !important;
+  }
