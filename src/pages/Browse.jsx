@@ -4,7 +4,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
-import Switch from "../components/switch";
+import Switch from "../components/Switch";
 import Modal from "../components/Modal";
 
 const Browse = () => {
