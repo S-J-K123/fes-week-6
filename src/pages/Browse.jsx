@@ -8,12 +8,15 @@ import Modal from "../components/Modal";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Skeleton from "../UI/Skeleton";
+import Pagination from "../components/Pagination";
 
 const Browse = () => {
   const [showModal, setShowModal] = useState(false);
   const [users, setUsers] = useState([]);
   const [searchName, setSearchName] = useState("");
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1)
+  const [postsPerPage, setPostsPerPage] = useState(5)
 
   function onSearch(event) {
     event.preventDefault();
@@ -45,6 +48,22 @@ const Browse = () => {
     const movieName = searchParams.get("search");
     fetchUsers(movieName);
   }, []);
+
+
+
+
+
+// Get current posts
+const indexOfLastPost =  currentPage * postsPerPage
+const indexOfFirstPost = indexOfLastPost - postsPerPage
+const currentPosts = users.slice(indexOfFirstPost, indexOfLastPost)
+
+
+// Change page
+const paginate = (pageNumber) => setCurrentPage(pageNumber)
+
+
+
 
   return (
     <div>
@@ -116,8 +135,9 @@ const Browse = () => {
 
       {showModal ? <Modal /> : null}
 
-      {users && users.map((user, id) => {
+      {currentPosts.map((user, id) => {
         return (
+  
           <div className="row" key={id}>
             <div className="user-list">
              
@@ -151,6 +171,12 @@ const Browse = () => {
           </div>
         );
       })}
+      <Pagination
+  postsPerPage={postsPerPage}
+  totalPosts={users.length}
+  paginate={paginate}
+  currentPage={currentPage}
+/>
     </div>
   );
 };
