@@ -271,8 +271,8 @@ a {
 }
 
 
-/* 
 
+/* 
 .user-list {
   width: auto;
   display: flex;
@@ -300,24 +300,58 @@ a {
  
 }
 
-.user-card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+
+
+ */
+/* new movies css*/
+.movies{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+
 }
 
 .user-card__container {
   padding: 2px 16px;
   
-} */
-
-
-
-
-
-
-.user-list{
-
-  display: flex;
+} 
+.user-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
+
+.user-list {
+  width: auto;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  justify-content: space-around;
+}
+
+.user-card {
+    
+  background-color: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 10px;
+  transition: 0.3s;
+  cursor: pointer;
+  border-radius: 10px;
+
+}
+
+.images{
+  width: 250px;
+}
+
+.user{
+  width: 320px;
+  margin-top: 30px;
+}
+
+
+
+
+
 
 .fav-title {
   color: #555;

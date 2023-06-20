@@ -1,0 +1,29 @@
+.numbers{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border-radius: 4px;
+}
+
+
+
+.page-item{
+    align-items: center;
+    background: none;
+    border-radius: 4px;
+    display: flex;
+    font-size: 16px;
+    font-weight: 600;
+    height: 36px;
+    justify-content: center;
+    margin: 0 4px;
+    width: 36px;
+}
+
+
+
+
+a{
+    color: black;
+}

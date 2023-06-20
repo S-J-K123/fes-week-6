@@ -16,7 +16,7 @@ const Browse = () => {
   const [searchName, setSearchName] = useState("");
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1)
-  const [postsPerPage, setPostsPerPage] = useState(5)
+  const [postsPerPage, setPostsPerPage] = useState(8)
 
   function onSearch(event) {
     event.preventDefault();
@@ -27,6 +27,7 @@ const Browse = () => {
 
   async function fetchUsers(movieName) {
     setLoading(true)
+  
     if (!movieName) {
       setUsers([]);
       return;
@@ -134,11 +135,11 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
       </section>
 
       {showModal ? <Modal /> : null}
-
-      {currentPosts.map((user, id) => {
+<div className="movies">
+{currentPosts.map((user, id) => {
         return (
   
-          <div className="row" key={id}>
+          <div key={id}>
             <div className="user-list">
              
                   <div className="user">
@@ -171,6 +172,8 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
           </div>
         );
       })}
+</div>
+     
       <Pagination
   postsPerPage={postsPerPage}
   totalPosts={users.length}
