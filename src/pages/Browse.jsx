@@ -15,19 +15,19 @@ const Browse = () => {
   const [users, setUsers] = useState([]);
   const [searchName, setSearchName] = useState("");
   const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1)
-  const [postsPerPage, setPostsPerPage] = useState(8)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(8);
 
   function onSearch(event) {
     event.preventDefault();
-    setLoading(false)
+    setLoading(false);
     fetchUsers(searchName);
     console.log(searchName);
   }
 
   async function fetchUsers(movieName) {
-    setLoading(true)
-  
+    setLoading(true);
+
     if (!movieName) {
       setUsers([]);
       return;
@@ -50,21 +50,17 @@ const Browse = () => {
     fetchUsers(movieName);
   }, []);
 
+  // Get current posts
+  let currentPosts = [];
 
+  if (users.length > 0) {
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    currentPosts = users.slice(indexOfFirstPost, indexOfLastPost);
+  }
 
-
-
-// Get current posts
-const indexOfLastPost =  currentPage * postsPerPage
-const indexOfFirstPost = indexOfLastPost - postsPerPage
-const currentPosts = users.slice(indexOfFirstPost, indexOfLastPost)
-
-
-// Change page
-const paginate = (pageNumber) => setCurrentPage(pageNumber)
-
-
-
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div>
@@ -135,21 +131,18 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
       </section>
 
       {showModal ? <Modal /> : null}
-<div className="movies">
-{currentPosts.map((user, id) => {
-        return (
-  
-          <div key={id}>
-            <div className="user-list">
-             
+
+      <div className="movies">
+        {currentPosts.length > 0 ? (
+          currentPosts.map((user, id) => {
+            return (
+              <div key={id}>
+                <div className="user-list">
                   <div className="user">
-                    {
-                      loading
-                      ? (
-                        <Skeleton width={'300px'} height={'300px'}/>
-                      ) :
-                      (
-                        <div className="user-card">
+                    {loading ? (
+                      <Skeleton width={"300px"} height={"300px"} />
+                    ) : (
+                      <div className="user-card">
                         <div className="user-card__container">
                           <img className="images" src={user.Poster} alt="" />{" "}
                           <p>
@@ -163,23 +156,23 @@ const paginate = (pageNumber) => setCurrentPage(pageNumber)
                           </p>
                         </div>
                       </div>
-                      )
-                    }
-                
+                    )}
+                  </div>
                 </div>
-             
-            </div>
-          </div>
-        );
-      })}
-</div>
-     
+              </div>
+            );
+          })
+        ) : (
+          <div> No search results found. </div>
+        )}
+      </div>
+
       <Pagination
-  postsPerPage={postsPerPage}
-  totalPosts={users.length}
-  paginate={paginate}
-  currentPage={currentPage}
-/>
+        postsPerPage={postsPerPage}
+        totalPosts={users.length}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
     </div>
   );
 };
