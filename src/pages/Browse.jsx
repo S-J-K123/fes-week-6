@@ -187,7 +187,7 @@ const Browse = () => {
             return (
               <div key={id}>
                 <div className="user-list">
-                  <div onClick={() => navigate(`/movie/${user.imdbID}`)}  className="user">
+                <div onClick={() => navigate(`/movie/${user.imdbID}`)}  className="user">
                     <div className="user-card">
                       <div className="user-card__container">
                         <img className="images" src={user.Poster} alt="" />

@@ -17,7 +17,7 @@ function App() {
      <Route path="/" element={<Home/>} />
      <Route path ="/browse" element={<Browse/>} />
      <Route path="/favourites" element={<Favourites/>} />
-     <Route path="/movie/:id" element={<MovieDetails/>} />
+     <Route path="/movies/:imdbID" component={MovieDetails} />
     </Routes>
   </Router>
 
