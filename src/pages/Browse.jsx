@@ -9,6 +9,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Skeleton from "../UI/Skeleton";
 import Pagination from "../components/Pagination";
+import { useParams, useNavigate } from "react-router-dom";
 
 const Browse = () => {
   const [showModal, setShowModal] = useState(false);
@@ -17,6 +18,9 @@ const Browse = () => {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(8);
+  const [selectedYear, setSelectedYear] = useState("");
+ const { id } = useParams()
+ const navigate = useNavigate()
 
   function onSearch(event) {
     event.preventDefault();
@@ -25,23 +29,29 @@ const Browse = () => {
     console.log(searchName);
   }
 
+  console.log(selectedYear);
+
   async function fetchUsers(movieName) {
-    setLoading(true);
+    try {
+      setLoading(true);
 
-    if (!movieName) {
-      setUsers([]);
-      return;
+      if (!movieName) {
+        setUsers([]);
+        return;
+      }
+
+      const { data } = await axios.get(
+        `https://www.omdbapi.com/?i=tt3896198&apikey=8e3ddd4c&s=${movieName}`
+      );
+
+      setUsers(data.Search);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+      console.log(data);
+    } catch (error) {
+      alert(error);
     }
-
-    const { data } = await axios.get(
-      `https://www.omdbapi.com/?i=tt3896198&apikey=8e3ddd4c&s=${movieName}`
-    );
-
-    setUsers(data.Search);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-    console.log(data);
   }
 
   useEffect(() => {
@@ -50,10 +60,41 @@ const Browse = () => {
     fetchUsers(movieName);
   }, []);
 
+// function movieClicked() {
+//   console.log('movieClicked()')
+// }
+
+  //  fetching filtered movies
+  async function filterMovies(movieName) {
+    try {
+      setLoading(true);
+
+      if (!movieName) {
+        setLoading(false);
+        return;
+      }
+
+      const { data } = await axios.get(
+        `https://www.omdbapi.com/?i=tt3896198&apikey=8e3ddd4c&s=${movieName}&y=${selectedYear}`
+      );
+
+      setUsers(data.Search);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+      console.log(data);
+    } catch (error) {
+      alert(error);
+    }
+  }
+
+
+
+
   // Get current posts
   let currentPosts = [];
 
-  if (users.length > 0) {
+  if (users && users.length > 0) {
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     currentPosts = users.slice(indexOfFirstPost, indexOfLastPost);
@@ -130,49 +171,53 @@ const Browse = () => {
         </button>
       </section>
 
-      {showModal ? <Modal /> : null}
+      {showModal ? (
+        <Modal
+          setSelectedYear={setSelectedYear}
+          selectedYear={selectedYear}
+          filterMovies={filterMovies}
+        />
+      ) : null}
 
-      <div className="movies">
-        {currentPosts.length > 0 ? (
+      <div  className="movies">
+        {loading ? (
+          <div>Loading...</div>
+        ) : users && users.length > 0 ? (
           currentPosts.map((user, id) => {
             return (
               <div key={id}>
                 <div className="user-list">
-                  <div className="user">
-                    {loading ? (
-                      <Skeleton width={"300px"} height={"300px"} />
-                    ) : (
-                      <div className="user-card">
-                        <div className="user-card__container">
-                          <img className="images" src={user.Poster} alt="" />{" "}
-                          <p>
-                            Title: <b>{user.Title}</b>{" "}
-                          </p>
-                          <p>
-                            Type: <b>{user.Type}</b>
-                          </p>
-                          <p>
-                            Year: <b>{user.Year}</b>
-                          </p>
-                        </div>
+                  <div onClick={() => navigate(`/movie/${user.imdbID}`)}  className="user">
+                    <div className="user-card">
+                      <div className="user-card__container">
+                        <img className="images" src={user.Poster} alt="" />
+                        <p>
+                          Title: <b>{user.Title}</b>
+                        </p>
+                        <p>
+                          Type: <b>{user.Type}</b>
+                        </p>
+                        <p>
+                          Year: <b>{user.Year}</b>
+                        </p>
                       </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               </div>
             );
           })
         ) : (
-          <div> No search results found. </div>
+          <div>No search results found.</div>
         )}
-      </div>
 
-      <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={users.length}
-        paginate={paginate}
-        currentPage={currentPage}
-      />
+        <Pagination
+          postsPerPage={postsPerPage}
+          totalPosts={users ? users.length : 0}
+          paginate={paginate}
+          currentPage={currentPage}
+        />
+      </div>
     </div>
   );
 };
