@@ -1,58 +1,76 @@
-
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
+import './movie-details.css'
 
 const MovieDetails = () => {
-    const [getMovie, setGetMovie] = useState({});
-    const { imdbID } = useParams();
-    const [loading, setLoading] = useState(true);
-  
-    useEffect(() => {
-      async function fetchMovieDetails() {
-        try {
-          setLoading(true)
-          const { data } = await axios.get(`https://www.omdbapi.com/?i=${imdbID}&apikey=8e3ddd4c`);
-          if (data.Response === "True") {
-            setGetMovie(data.Search);
-            setLoading(false);
-            console.log(data);
-          } else {
-            console.log("Error: ", data.Error);
-          }
+  const [movie, setMovie] = useState({});
+  const { id } = useParams();
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    async function fetchMovieDetails() {
+      try {
+        setLoading(true);
+        const { data } = await axios.get(
+          `https://www.omdbapi.com/?i=${id}&apikey=8e3ddd4c`
+        );
+        console.log(data);
+        setMovie(data);
         setLoading(false);
-        } catch (error) {
-          console.log(error);
-        }
+      } catch (error) {
+        console.log(error);
       }
-      console.log(imdbID)
-  
-      fetchMovieDetails();
-    }, [imdbID]);
-  
-    return (
-      <div>
-        {loading ? (
-          <div>Loading...</div>
-        ) : (
-          <div  className="user-card">
-            <div className="user-card__container">
-              <img className="images" src={getMovie.Poster} alt={getMovie.Title} />
-              <p>
-                Title: <b>{getMovie.Title}</b>
-              </p>
-              <p>
-                Type: <b>{getMovie.Type}</b>
-              </p>
-              <p>
-                Year: <b>{getMovie.Year}</b>
-              </p>
-            </div>
+    }
+
+    fetchMovieDetails();
+  }, [id]);
+
+/* Change classnames to not change browse movies css */
+
+  return (
+    <div>
+   <Link to={`/browse?search=${movie.Title}`}>Movies</Link>
+
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <div className="user-card">
+          <div className="user-card__container">
+            <img className="images" src={movie.Poster} alt={movie.Title} />
+            <p className="title">
+              <b>{movie.Title}</b>
+            </p>
+            <p>
+              Type: <b>{movie.Type}</b>
+            </p>
+            <p>
+              Overview: <b>{movie.Plot}</b>
+            </p>
+            <p>
+              Year: <b>{movie.Year}</b>
+            </p>
+            <p>
+              Rated: <b>{movie.Rated}</b>
+            </p>
+            <p>
+              Released: <b>{movie.Released}</b>
+            </p>
+            <p>
+              Metascore: <b>{movie.Metascore}</b>
+            </p>
+            <p>
+              Box Office: <b>{movie.BoxOffice}</b>
+            </p>
+            <p>
+              Genre: <b>{movie.Genre}</b>
+            </p>
           </div>
-        )}
-      </div>
-    );
-  };
-  
-  export default MovieDetails;
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default MovieDetails;

@@ -9,34 +9,37 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Skeleton from "../UI/Skeleton";
 import Pagination from "../components/Pagination";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Browse = () => {
   const [showModal, setShowModal] = useState(false);
-  const [users, setUsers] = useState([]);
+  const [movies, setMovies] = useState([]);
   const [searchName, setSearchName] = useState("");
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(8);
   const [selectedYear, setSelectedYear] = useState("");
- const { id } = useParams()
- const navigate = useNavigate()
+  const navigate = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const searchQuery = searchParams.get("search");
 
   function onSearch(event) {
     event.preventDefault();
     setLoading(false);
-    fetchUsers(searchName);
+    fetchMovies(searchName);
     console.log(searchName);
   }
 
   console.log(selectedYear);
 
-  async function fetchUsers(movieName) {
+  async function fetchMovies(movieName) {
     try {
       setLoading(true);
 
       if (!movieName) {
-        setUsers([]);
+        setMovies([]);
         return;
       }
 
@@ -44,7 +47,7 @@ const Browse = () => {
         `https://www.omdbapi.com/?i=tt3896198&apikey=8e3ddd4c&s=${movieName}`
       );
 
-      setUsers(data.Search);
+      setMovies(data.Search);
       setTimeout(() => {
         setLoading(false);
       }, 1000);
@@ -57,12 +60,8 @@ const Browse = () => {
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const movieName = searchParams.get("search");
-    fetchUsers(movieName);
+    fetchMovies(movieName);
   }, []);
-
-// function movieClicked() {
-//   console.log('movieClicked()')
-// }
 
   //  fetching filtered movies
   async function filterMovies(movieName) {
@@ -78,7 +77,7 @@ const Browse = () => {
         `https://www.omdbapi.com/?i=tt3896198&apikey=8e3ddd4c&s=${movieName}&y=${selectedYear}`
       );
 
-      setUsers(data.Search);
+      setMovies(data.Search);
       setTimeout(() => {
         setLoading(false);
       }, 1000);
@@ -88,20 +87,25 @@ const Browse = () => {
     }
   }
 
-
-
-
   // Get current posts
-  let currentPosts = [];
+  let currentMovies = [];
 
-  if (users && users.length > 0) {
+  if (movies && movies.length > 0) {
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    currentPosts = users.slice(indexOfFirstPost, indexOfLastPost);
+    currentMovies = movies.slice(indexOfFirstPost, indexOfLastPost);
   }
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const navigateToMovieDetails = (id) => {
+    navigate(`/movie/${id}`);
+  };
+
+
+
+
 
   return (
     <div>
@@ -179,41 +183,42 @@ const Browse = () => {
         />
       ) : null}
 
-      <div  className="movies">
+      <div className="movies">
         {loading ? (
           <div>Loading...</div>
-        ) : users && users.length > 0 ? (
-          currentPosts.map((user, id) => {
-            return (
-              <div key={id}>
-                <div className="user-list">
-                <div onClick={() => navigate(`/movie/${user.imdbID}`)}  className="user">
-                    <div className="user-card">
-                      <div className="user-card__container">
-                        <img className="images" src={user.Poster} alt="" />
-                        <p>
-                          Title: <b>{user.Title}</b>
-                        </p>
-                        <p>
-                          Type: <b>{user.Type}</b>
-                        </p>
-                        <p>
-                          Year: <b>{user.Year}</b>
-                        </p>
-                      </div>
+        ) : movies && movies.length > 0 ? (
+          currentMovies.map((movie) => (
+            <div key={movie.imdbID}>
+              <div className="user-list">
+                <div
+                  onClick={() => navigateToMovieDetails(movie.imdbID)}
+                  className="user"
+                >
+                  <div className="user-card">
+                    <div className="user-card__container">
+                      <img className="images" src={movie.Poster} alt="" />
+                      <p>
+                        Title: <b>{movie.Title}</b>
+                      </p>
+                      <p>
+                        Type: <b>{movie.Type}</b>
+                      </p>
+                      <p>
+                        Year: <b>{movie.Year}</b>
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
-            );
-          })
+            </div>
+          ))
         ) : (
           <div>No search results found.</div>
         )}
 
         <Pagination
           postsPerPage={postsPerPage}
-          totalPosts={users ? users.length : 0}
+          totalPosts={movies ? movies.length : 0}
           paginate={paginate}
           currentPage={currentPage}
         />
@@ -223,3 +228,4 @@ const Browse = () => {
 };
 
 export default Browse;
+  
