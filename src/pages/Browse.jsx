@@ -20,7 +20,6 @@ const Browse = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(8);
   const [selectedYear, setSelectedYear] = useState("");
-  const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get("search");
@@ -103,6 +102,18 @@ const Browse = () => {
     navigate(`/movie/${id}`);
   };
 
+
+  // navigation function
+  function navigateBack(navigate) {
+    const searchTerm = sessionStorage.getItem('searchTerm');
+  }
+
+// clearing the stored searchTerm
+  useEffect(() => {
+    return () => {
+      sessionStorage.removeItem("searchTerm");
+    };
+  }, []);
 
 
 
@@ -228,4 +239,3 @@ const Browse = () => {
 };
 
 export default Browse;
-  

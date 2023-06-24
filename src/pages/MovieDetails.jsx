@@ -29,9 +29,18 @@ const MovieDetails = () => {
 
 /* Change classnames to not change browse movies css */
 
+
+// retrieving the searchTerm
+
+useEffect(() => {
+  const searchTerm = sessionStorage.getItem("searchTerm");
+    console.log("Search Term:", searchTerm);
+}, [])
+
+
   return (
     <div>
-   <Link to={`/browse?search=${movie.Title}`}>Movies</Link>
+  <button onClick={() => (navigate)}>Go Back</button>
 
       {loading ? (
         <div>Loading...</div>
