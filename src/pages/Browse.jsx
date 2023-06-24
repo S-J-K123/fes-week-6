@@ -23,6 +23,7 @@ const Browse = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const searchQuery = searchParams.get("search");
+  const navigate = useNavigate()
 
   function onSearch(event) {
     event.preventDefault();
@@ -98,22 +99,18 @@ const Browse = () => {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+ 
+
+
+  // navigation function
   const navigateToMovieDetails = (id) => {
+    localStorage.setItem('searchTerm', searchName);
     navigate(`/movie/${id}`);
   };
 
 
-  // navigation function
-  function navigateBack(navigate) {
-    const searchTerm = sessionStorage.getItem('searchTerm');
-  }
-
 // clearing the stored searchTerm
-  useEffect(() => {
-    return () => {
-      sessionStorage.removeItem("searchTerm");
-    };
-  }, []);
+
 
 
 

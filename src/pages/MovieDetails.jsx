@@ -8,6 +8,7 @@ const MovieDetails = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate()
+  const searchTerm = localStorage.getItem('searchTerm');
 
   useEffect(() => {
     async function fetchMovieDetails() {
@@ -30,17 +31,16 @@ const MovieDetails = () => {
 /* Change classnames to not change browse movies css */
 
 
-// retrieving the searchTerm
+function previousPage() {
+  navigate(`/browse?search=${searchTerm}`);
+}
 
-useEffect(() => {
-  const searchTerm = sessionStorage.getItem("searchTerm");
-    console.log("Search Term:", searchTerm);
-}, [])
+
 
 
   return (
     <div>
-  <button onClick={() => (navigate)}>Go Back</button>
+ <button onClick={previousPage}>Go Back</button>
 
       {loading ? (
         <div>Loading...</div>
